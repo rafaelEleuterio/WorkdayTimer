@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Timers;
-
+﻿using System.Timers;
+using WorkdayTimerDesktopApp.Services;
 using Forms = System.Windows.Forms;
 
 namespace WorkdayTimerDesktopApp.Stores;
@@ -10,7 +7,7 @@ public class TimerStore : IDisposable
 {
     private static TimerStore instance = new TimerStore();
     private readonly INotificationService _notificationService;
-    private readonly Timer _timer;
+    private readonly System.Timers.Timer _timer;
 
     private DateTime _lastTimePaused;
     private TimeSpan _timeRunned;
@@ -32,7 +29,7 @@ public class TimerStore : IDisposable
 
     public TimerStore()
     {
-        _timer = new Timer(333);
+        _timer = new System.Timers.Timer(333);
         _timer.Elapsed += Timer_Elapsed;
     }
     public TimerStore(INotificationService notificationService)
@@ -40,7 +37,7 @@ public class TimerStore : IDisposable
         _notificationService = notificationService;
         _notificationService.NotificationAccepted += NotificationService_NotificationAccepted;
 
-        _timer = new Timer(333);
+        _timer = new System.Timers.Timer(333);
         _timer.Elapsed += Timer_Elapsed;
     }
     public static TimerStore GetInstance()
