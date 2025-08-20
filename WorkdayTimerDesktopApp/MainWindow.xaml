@@ -5,8 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorkdayTimerDesktopApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="WorkTimer!" Height="210" Width="380"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        ResizeMode="NoResize"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel
+        Width="364"
+        Orientation="Vertical">
+        <materialDesign:ColorZone
+            Padding="16"
+            Mode="PrimaryMid">
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                materialDesign:RippleAssist.IsCentered="True"
+                Orientation="Horizontal">
+                <materialDesign:ColorZone
+                    Padding="8,4,8,4"
+                    Panel.ZIndex="1"
+                    materialDesign:ElevationAssist.Elevation="Dp2"
+                    CornerRadius="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Mode="Standard">
+                    <TextBlock
+                        Name="timerTextBlock"
+                        MinWidth="200"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignHeadline3TextBlock}"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                        Text="{Binding Path=TimeRunned}"/>
+                </materialDesign:ColorZone>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <StackPanel
+            Orientation="Horizontal">
+            <Button
+                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                Margin="8,8,8,8"
+                ToolTip="Bora começar a trampar!"
+                IsEnabled="{Binding Path=ButtonStartEnabled}"
+                Command="{Binding Path=StartCommand}">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="Timer" 
+                    IsEnabled="{Binding Path=ButtonStartEnabled}"/>
+            </Button>
+            <!--Click="StartTimer_Click"-->
+            <!--Click="StopTimer_Click"-->
+            <Button
+                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                Margin="8,8,8,8"
+                ToolTip="Chega de trampo por hoje!"
+                IsEnabled="{Binding Path=ButtonStopEnabled}"
+                Command="{Binding Path=StopCommand}">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="TimerStop" 
+                    IsEnabled="{Binding Path=ButtonStopEnabled}"/>
+            </Button>
+            <!--Click="ResumeTimer_Click"-->
+            <Button
+                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                Margin="8,8,8,8"
+                ToolTip="Bora voltar a trampar!"
+                IsEnabled="{Binding Path=ButtonResumeEnabled}"
+                Command="{Binding Path=ResumeCommand}">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="TimerPlay" 
+                    IsEnabled="{Binding Path=ButtonResumeEnabled}"/>
+            </Button>
+            <!--Click="OnCoffeeBreak_Click"-->
+            <Button
+                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                Margin="8,8,8,8"
+                ToolTip="Pausinha remunerada :)"
+                IsEnabled="{Binding Path=ButtonCoffeeBreakEnabled}"
+                Command="{Binding Path=CoffeeBreakCommand}">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="Coffee"
+                    IsEnabled="{Binding Path=ButtonCoffeeBreakEnabled}"/>
+            </Button>
+            <!--Click="OnNonCoffeeBreak_Click"-->
+            <Button
+                Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                Margin="8,8,8,8"
+                ToolTip="Pausa não remunerada :("
+                IsEnabled="{Binding Path=ButtonNonCoffeeBreakEnabled}"
+                Command="{Binding Path=NonCoffeeBreakCommand}">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="CoffeeOff" 
+                    IsEnabled="{Binding Path=ButtonNonCoffeeBreakEnabled}"/>
+            </Button>
+        </StackPanel>
+    </StackPanel>
 </Window>

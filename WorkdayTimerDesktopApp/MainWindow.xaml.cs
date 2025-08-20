@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WorkdayTimerDesktopApp.ViewModels;
 
 namespace WorkdayTimerDesktopApp
 {
@@ -16,8 +17,19 @@ namespace WorkdayTimerDesktopApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TimerViewModel TimerViewModel { get; set; }
         public MainWindow()
         {
+            TimerViewModel = TimerViewModel.GetInstance();
+            DataContext = TimerViewModel;
+            TimerViewModel.ChangeColor(0);
+            InitializeComponent();
+        }
+        public MainWindow(TimerViewModel timerViewModel)
+        {
+            TimerViewModel = timerViewModel;
+            DataContext = TimerViewModel;
+            TimerViewModel.ChangeColor(0);
             InitializeComponent();
         }
     }
